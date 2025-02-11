@@ -21,11 +21,20 @@ struct AddCategoryView: View {
             }
             .navigationTitle("Add Category")
             .toolbar {
-                Button("Save") {
-                    let category = Category(name: name)
-                    modelContext.insert(category)
-                    dismiss()
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save") {
+                        let category = Category(name: name)
+                        modelContext.insert(category)
+                        dismiss()
+                    }
                 }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                
             }
         }
     }

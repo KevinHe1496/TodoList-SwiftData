@@ -1,0 +1,11 @@
+# Archivos del sistema
+.DS_Store
+
+# Archivos de usuario de Xcode
+*.xcuserdatad/
+*.xcscmblueprint
+
+# Carpetas de compilación
+DerivedData/
+build/
+
