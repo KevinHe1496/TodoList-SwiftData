@@ -6,13 +6,50 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TasksView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    @Environment(\.modelContext) var modelContext
+    @Query var tasks: [Tasks]
+    @State var showAddTask = false
+    @Bindable private var category: Category
+    
+    init(category: Category) {
+        self.category = category
     }
+    
+    var body: some View {
+        List {
+            ForEach(category.tasks) { task in
+                Text(task.title)
+            }
+            .onDelete { index in
+                deleteTask(at: index)
+            }
+        }
+        .navigationTitle(category.name)
+        //MARK: Toolbar
+        .toolbar {
+            Button("Add Task", systemImage: "plus") {
+                showAddTask = true
+            }
+        }
+        //MARK: Sheet Add Category
+        .sheet(isPresented: $showAddTask) {
+            AddTaskView(category: category)
+        }
+    }
+    
+    private func deleteTask(at offsets: IndexSet) {
+        for index in offsets {
+            let task = category.tasks[index]
+            modelContext.delete(task)
+        }
+        try? modelContext.save()
+    }
+    
 }
 
 #Preview {
-    TasksView()
+    TasksView(category: Category(name: "Deporte"))
 }

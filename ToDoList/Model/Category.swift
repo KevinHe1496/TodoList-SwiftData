@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Category {
     var name: String
-    @Relationship(deleteRule: .cascade) var tasks = [Tasks]()
+    @Relationship(deleteRule: .cascade) var tasks = [Tasks]() // relacion con tasks
     
     init(name: String) {
         self.name = name

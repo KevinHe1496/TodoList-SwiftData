@@ -15,7 +15,7 @@ struct AddCategoryView: View {
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("Add Category", text: $name)
             }

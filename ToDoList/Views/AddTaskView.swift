@@ -11,10 +11,11 @@ struct AddTaskView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     @State var name: String = ""
+    @Bindable var category: Category
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("Add Task", text: $name)
             }
@@ -22,8 +23,9 @@ struct AddTaskView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        let category = Category(name: name)
-                        modelContext.insert(category)
+                        let task = Tasks(title: name, createdAt: Date.now, category: category)
+                        category.tasks.append(task)
+                        try? modelContext.save()
                         dismiss()
                     }
                 }
@@ -40,5 +42,5 @@ struct AddTaskView: View {
 }
 
 #Preview {
-    AddTaskView()
+    AddTaskView(category: Category(name: "asd"))
 }

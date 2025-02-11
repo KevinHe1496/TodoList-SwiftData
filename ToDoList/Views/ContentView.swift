@@ -9,18 +9,20 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
     @Query var categories: [Category]
     @State var showAddCategory = false
-    @State var category = ""
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(categories) { category in
                     NavigationLink(category.name) {
-                        Text(category.name)
+                        TasksView(category: category)
                     }
-                    
+                }
+                .onDelete { index in
+                    deleteCategory(at: index)
                 }
             }
             .navigationTitle("Todo List")
@@ -36,6 +38,14 @@ struct ContentView: View {
             }
             
         }
+    }
+    
+    private func deleteCategory(at offsets: IndexSet) {
+        for index in offsets {
+            let catogorySelected = categories[index]
+            modelContext.delete(catogorySelected)
+        }
+        try? modelContext.save()
     }
 }
 
