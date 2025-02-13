@@ -20,21 +20,39 @@ struct TasksView: View {
     }
     
     var body: some View {
-        List {
-            ForEach(category.tasks) { task in
-//                Text(task.title)
-                TaskRowView(task: task)
-            }
-            .onDelete { index in
-                deleteTask(at: index)
+        VStack {
+            if tasks.isEmpty {
+                Spacer()
+                ContentUnavailableView {
+                    Label("No Tasks", systemImage: "list.bullet.rectangle")
+                } description: {
+                    Text("You don't have any tasks saved yet.")
+                } actions: {
+                    Button("Add Task") {
+                        showAddTask = true
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                Spacer()
+            } else {
+                List {
+                    ForEach(category.tasks) { task in
+                        TaskRowView(task: task)
+                    }
+                    .onDelete { index in
+                        deleteTask(at: index)
+                    }
+                }
             }
         }
+        
         .navigationTitle(category.name)
         //MARK: Toolbar
         .toolbar {
             Button("Add Task", systemImage: "plus") {
                 showAddTask = true
             }
+            .disabled(tasks.isEmpty)
         }
         //MARK: Sheet Add Category
         .sheet(isPresented: $showAddTask) {

@@ -21,7 +21,7 @@ struct ContentView: View {
                     ContentUnavailableView {
                         Label("No Categories", systemImage: "list.bullet.rectangle")
                     } description: {
-                        Text("You don't have any Categories saved yet.")
+                        Text("You don't have any categories saved yet.")
                     } actions: {
                         Button("Add Category") {
                             showAddCategory = true
@@ -44,15 +44,17 @@ struct ContentView: View {
             }
             .navigationTitle("Todo List")
             .toolbar {
+                
                 Button("Add Category", systemImage: "plus") {
                     showAddCategory = true
                 }
+                .disabled(categories.isEmpty)
             }
             .sheet(isPresented: $showAddCategory) {
                 AddCategoryView()
             }
         }
-
+        
     }
     
     private func deleteCategory(at offsets: IndexSet) {
