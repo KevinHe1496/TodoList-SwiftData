@@ -15,8 +15,9 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            VStack {
                 if categories.isEmpty {
+                    Spacer()
                     ContentUnavailableView {
                         Label("No Categories", systemImage: "list.bullet.rectangle")
                     } description: {
@@ -27,33 +28,31 @@ struct ContentView: View {
                         }
                         .buttonStyle(.borderedProminent)
                     }
+                    Spacer()
                 } else {
-                    //MARK: Categories
-                    ForEach(categories) { category in
-                        
-                        NavigationLink(category.name) {
-                            TasksView(category: category)
+                    List {
+                        ForEach(categories) { category in
+                            NavigationLink(category.name) {
+                                TasksView(category: category)
+                            }
                         }
-                    }
-                    .onDelete { index in
-                        deleteCategory(at: index)
+                        .onDelete { index in
+                            deleteCategory(at: index)
+                        }
                     }
                 }
             }
-            //MARK: NavigationTitle
             .navigationTitle("Todo List")
-            //MARK: Toolbar
             .toolbar {
                 Button("Add Category", systemImage: "plus") {
                     showAddCategory = true
                 }
             }
-            //MARK: Sheet Add Category
             .sheet(isPresented: $showAddCategory) {
                 AddCategoryView()
             }
-            
         }
+
     }
     
     private func deleteCategory(at offsets: IndexSet) {
