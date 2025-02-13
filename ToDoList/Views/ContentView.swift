@@ -16,15 +16,31 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(categories) { category in
-                    NavigationLink(category.name) {
-                        TasksView(category: category)
+                if categories.isEmpty {
+                    ContentUnavailableView {
+                        Label("No Categories", systemImage: "list.bullet.rectangle")
+                    } description: {
+                        Text("You don't have any Categories saved yet.")
+                    } actions: {
+                        Button("Add Category") {
+                            showAddCategory = true
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                } else {
+                    //MARK: Categories
+                    ForEach(categories) { category in
+                        
+                        NavigationLink(category.name) {
+                            TasksView(category: category)
+                        }
+                    }
+                    .onDelete { index in
+                        deleteCategory(at: index)
                     }
                 }
-                .onDelete { index in
-                    deleteCategory(at: index)
-                }
             }
+            //MARK: NavigationTitle
             .navigationTitle("Todo List")
             //MARK: Toolbar
             .toolbar {

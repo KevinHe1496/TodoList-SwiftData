@@ -12,7 +12,8 @@ struct TasksView: View {
     @Environment(\.modelContext) var modelContext
     @Query var tasks: [Tasks]
     @State var showAddTask = false
-    @Bindable private var category: Category
+    @State var checkBox = false
+    @Bindable var category: Category
     
     init(category: Category) {
         self.category = category
@@ -21,7 +22,8 @@ struct TasksView: View {
     var body: some View {
         List {
             ForEach(category.tasks) { task in
-                Text(task.title)
+//                Text(task.title)
+                TaskRowView(task: task)
             }
             .onDelete { index in
                 deleteTask(at: index)
