@@ -6,7 +6,7 @@ struct AddCategoryView: View {
     @Environment(\.dismiss) var dismiss
     @State var name: String = ""
     let categoriesIcons = ["house", "briefcase", "cart", "figure.mind.and.body", "book", "gamecontroller", "airplane", "gift"]
-    @State var iconSelected = ""
+    @State var iconSelected = "house"
     
     var body: some View {
         NavigationStack {

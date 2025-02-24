@@ -11,7 +11,7 @@ struct AddTaskView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     @State var name: String = ""
-    @Bindable var category: Category
+    var category: Category
     
     
     var body: some View {

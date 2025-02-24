@@ -9,9 +9,8 @@ import SwiftUI
 
 struct TaskRowView: View {
     @Environment(\.modelContext) var modelContext
-    @Bindable var task: Tasks
-    
-    
+    var task: Tasks
+
     var body: some View {
         HStack {
             Button {
@@ -26,12 +25,16 @@ struct TaskRowView: View {
             .frame(width: 20, height: 20)
             .buttonStyle(.plain)
             Text(task.title)
+                .font(.headline)
                 .foregroundStyle(task.isCompleted ? .secondary : .primary)
+            
             Spacer()
+            
             Text(task.createdAt.formatted(date: .abbreviated, time: .omitted))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
+        .frame(height: 40)
     }
     var filledReminderLabel: some View {
         Circle()
