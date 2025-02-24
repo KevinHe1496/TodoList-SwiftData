@@ -36,15 +36,14 @@ struct ContentView: View {
                             NavigationLink {
                                 TasksView(category: category)
                             } label: {
-                                Image(systemName: category.iconName)
-                                Text(category.name)
-                                    .font(.headline)
+                                CategoryRowView(name: category.name, icon: category.iconName)
                             }
                         }
                         .onDelete { index in
                             deleteCategory(at: index)
                         }
                     }
+                    .listStyle(.grouped)
                 }
             }
             .navigationTitle("Todo List")

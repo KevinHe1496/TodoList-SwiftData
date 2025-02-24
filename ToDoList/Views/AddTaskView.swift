@@ -16,6 +16,7 @@ struct AddTaskView: View {
     
     var body: some View {
         NavigationStack {
+            
             Form {
                 TextField("Add Task", text: $name)
             }

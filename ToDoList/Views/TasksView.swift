@@ -21,7 +21,7 @@ struct TasksView: View {
     
     var body: some View {
         VStack {
-            if tasks.isEmpty {
+            if category.tasks.isEmpty {
                 Spacer()
                 ContentUnavailableView {
                     Label("No Tasks", systemImage: "list.bullet.rectangle")
