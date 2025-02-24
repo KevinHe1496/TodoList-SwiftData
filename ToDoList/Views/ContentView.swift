@@ -57,7 +57,6 @@ struct ContentView: View {
             .sheet(isPresented: $showAddCategory) {
                 AddCategoryView()
             }
-//            .background(Color.lightBackground)
         }
         
         

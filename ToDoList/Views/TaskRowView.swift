@@ -24,9 +24,12 @@ struct TaskRowView: View {
             }
             .frame(width: 20, height: 20)
             .buttonStyle(.plain)
+            
+            
             Text(task.title)
                 .font(.headline)
                 .foregroundStyle(task.isCompleted ? .secondary : .primary)
+                .padding(.horizontal)
             
             Spacer()
             
@@ -34,7 +37,6 @@ struct TaskRowView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .padding()
         .frame(height: 40)
     }
     var filledReminderLabel: some View {
