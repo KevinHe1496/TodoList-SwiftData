@@ -71,5 +71,5 @@ struct TasksView: View {
 }
 
 #Preview {
-    TasksView(category: Category(name: "Deporte"))
+    TasksView(category: Category(name: "Deporte", iconName: "house"))
 }

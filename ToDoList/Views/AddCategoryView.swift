@@ -6,7 +6,7 @@ struct AddCategoryView: View {
     @Environment(\.dismiss) var dismiss
     @State var name: String = ""
     let categoriesIcons = ["house", "briefcase", "cart", "figure.mind.and.body", "book", "gamecontroller", "airplane", "gift"]
-    @State var categorySelected = "house"
+    @State var iconSelected = ""
     
     var body: some View {
         NavigationStack {
@@ -22,10 +22,10 @@ struct AddCategoryView: View {
                                     .scaledToFit()
                                     .frame(width: 33, height: 20) // Tamaño del ícono
                                     .padding()
-                                    .background(categorySelected == icon ? Color.blue.opacity(0.2) : Color.clear)
+                                    .background(iconSelected == icon ? Color.blue.opacity(0.2) : Color.clear)
                                     .cornerRadius(8)
                                     .onTapGesture {
-                                        categorySelected = icon
+                                        iconSelected = icon
                                     }
                             }
                         }
@@ -36,9 +36,15 @@ struct AddCategoryView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        let category = Category(name: name)
-                        modelContext.insert(category)
-                        dismiss()
+                        do {
+                            let category = Category(name: name, iconName: iconSelected)
+                            modelContext.insert(category)
+                            try modelContext.save()
+                            dismiss()
+                        } catch {
+                            print("Error al guardar el contexto: \(error)")
+                        }
+                        
                     }
                 }
                 

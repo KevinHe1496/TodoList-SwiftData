@@ -32,8 +32,13 @@ struct ContentView: View {
                 } else {
                     List {
                         ForEach(categories) { category in
-                            NavigationLink(category.name) {
+                            
+                            NavigationLink {
                                 TasksView(category: category)
+                            } label: {
+                                Image(systemName: category.iconName)
+                                Text(category.name)
+                                    .font(.headline)
                             }
                         }
                         .onDelete { index in

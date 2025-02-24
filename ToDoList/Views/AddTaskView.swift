@@ -42,5 +42,5 @@ struct AddTaskView: View {
 }
 
 #Preview {
-    AddTaskView(category: Category(name: "asd"))
+    AddTaskView(category: Category(name: "asd", iconName: "house"))
 }
