@@ -56,7 +56,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showAddCategory) {
                 AddCategoryView()
+                    .presentationDetents([.medium])
             }
+            
         }
         
         

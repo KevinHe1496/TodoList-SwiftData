@@ -57,6 +57,7 @@ struct TasksView: View {
         //MARK: Sheet Add Category
         .sheet(isPresented: $showAddTask) {
             AddTaskView(category: category)
+                .presentationDetents([.medium])
         }
     }
     
