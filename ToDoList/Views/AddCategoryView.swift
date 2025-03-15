@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct AddCategoryView: View {
     @Environment(\.modelContext) var modelContext
@@ -40,6 +41,7 @@ struct AddCategoryView: View {
                             let category = Category(name: name, iconName: iconSelected)
                             modelContext.insert(category)
                             try modelContext.save()
+                            customNotification()
                             dismiss()
                         } catch {
                             print("Error al guardar el contexto: \(error)")
@@ -55,6 +57,22 @@ struct AddCategoryView: View {
                 }
             }
         }
+    }
+    
+    private func customNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Don't forget to complete \(name)"
+        content.subtitle = "You haven't completed all the tasks yet."
+        content.sound = UNNotificationSound.default
+
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
     }
 }
 

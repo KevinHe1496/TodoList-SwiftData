@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
@@ -71,9 +72,10 @@ struct ContentView: View {
                     .presentationDetents([.medium])
             }
             .searchable(text: $searchText)
+            .onAppear {
+                notificationRequest()
+            }
         }
-        
-        
     }
     
     private func deleteCategory(at offsets: IndexSet) {
@@ -82,6 +84,16 @@ struct ContentView: View {
             modelContext.delete(catogorySelected)
         }
         try? modelContext.save()
+    }
+    
+    private func notificationRequest() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("All set!")
+            } else if let error {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
