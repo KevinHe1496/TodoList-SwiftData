@@ -12,6 +12,18 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query var categories: [Category]
     @State var showAddCategory = false
+    @State var searchText = ""
+    
+    var filteredCategories: [Category] {
+        if searchText.isEmpty {
+            categories
+        } else {
+            categories.filter { category in
+                category.name.localizedStandardContains(searchText)
+            }
+        }
+    }
+    
     
     var body: some View {
         NavigationStack {
@@ -31,7 +43,7 @@ struct ContentView: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(categories) { category in
+                        ForEach(filteredCategories, id: \.id) { category in
                             
                             NavigationLink {
                                 TasksView(category: category)
@@ -58,7 +70,7 @@ struct ContentView: View {
                 AddCategoryView()
                     .presentationDetents([.medium])
             }
-            
+            .searchable(text: $searchText)
         }
         
         
