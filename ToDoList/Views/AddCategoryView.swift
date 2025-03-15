@@ -63,6 +63,7 @@ struct AddCategoryView: View {
         let content = UNMutableNotificationContent()
         content.title = "Don't forget to complete \(name)"
         content.subtitle = "You haven't completed all the tasks yet."
+        
         content.sound = UNNotificationSound.default
 
         // show this notification five seconds from now
