@@ -13,6 +13,7 @@ struct AddCategoryView: View {
         NavigationStack {
             Form {
                 TextField("Add Category", text: $name)
+                    .accessibilityLabel("Enter the name of the category")
                 
                 Section("Select Category") {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -28,6 +29,8 @@ struct AddCategoryView: View {
                                     .onTapGesture {
                                         iconSelected = icon
                                     }
+                                    .accessibilityLabel("Select \(icon) icon")
+                                    .accessibilityHint("Tap to select this icon")
                             }
                         }
                     }
@@ -48,12 +51,16 @@ struct AddCategoryView: View {
                         }
                         
                     }
+                    .accessibilityLabel("Save category")
+                    .accessibilityHint("Saves the category and goes back to the list")
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .accessibilityLabel("Cancel and go back")
+                    .accessibilityHint("Discards changes and goes back to the previous screen")
                 }
             }
         }

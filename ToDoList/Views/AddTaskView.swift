@@ -19,6 +19,7 @@ struct AddTaskView: View {
             
             Form {
                 TextField("Add Task", text: $name)
+                    .accessibilityLabel("Enter a new task")
             }
             .navigationTitle("Add Task")
             .toolbar {
@@ -29,12 +30,16 @@ struct AddTaskView: View {
                         try? modelContext.save()
                         dismiss()
                     }
+                    .accessibilityLabel("Save task")
+                    .accessibilityHint("Saves the new task and returns to the list")
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .accessibilityLabel("Cancel and go back")
+                    .accessibilityHint("Discards changes and goes back to the previews screen")
                 }
                 
             }
