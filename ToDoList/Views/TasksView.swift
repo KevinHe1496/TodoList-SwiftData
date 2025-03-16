@@ -33,6 +33,7 @@ struct TasksView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 }
+                .accessibilityRemoveTraits(.isImage)
                 Spacer()
             } else {
                 List {

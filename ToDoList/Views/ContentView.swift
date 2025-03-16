@@ -41,6 +41,8 @@ struct ContentView: View {
                         }
                         .buttonStyle(.borderedProminent)
                     }
+                    .accessibilityRemoveTraits(.isImage)
+                    
                     Spacer()
                 } else {
                     List {
@@ -51,6 +53,7 @@ struct ContentView: View {
                             } label: {
                                 CategoryRowView(name: category.name, icon: category.iconName)
                             }
+                            
                         }
                         .onDelete { index in
                             deleteCategory(at: index)
