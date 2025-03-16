@@ -2,7 +2,7 @@
 
 A simple and efficient **To-Do List app** built with **SwiftData** to store tasks persistently. This project applies concepts from **Hacking with iOS: SwiftUI Edition**, integrating accessibility and modern iOS features.  
 
-![Screens](https://i.postimg.cc/FKqdvRx1/todolist.png)
+
 
 ## 🚀 Features  
 
@@ -15,7 +15,7 @@ A simple and efficient **To-Do List app** built with **SwiftData** to store task
 
 ## 📱 Screenshots  
 
-<img src="screenshot1.png" width="250"> <img src="screenshot2.png" width="250">  
+![Screens](https://i.postimg.cc/FKqdvRx1/todolist.png) 
 
 ## 🎯 Why SwiftData?  
 
