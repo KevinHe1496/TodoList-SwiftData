@@ -68,7 +68,7 @@ struct AddCategoryView: View {
     
     private func customNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Don't forget to complete \(name)"
+        content.title = "Complete \(name)"
         content.subtitle = "You haven't completed all the tasks yet."
         
         content.sound = UNNotificationSound.default
