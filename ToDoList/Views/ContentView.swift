@@ -40,7 +40,11 @@ struct ContentView: View {
                             showAddCategory = true
                         }
                         .buttonStyle(.borderedProminent)
+                        .accessibilityLabel("Add a new category")
+                        .accessibilityHint("Opens a form to add a new category")
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("No Categories. You don't have any categories saved yet.")
                     .accessibilityRemoveTraits(.isImage)
                     
                     Spacer()

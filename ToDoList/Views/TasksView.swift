@@ -32,7 +32,11 @@ struct TasksView: View {
                         showAddTask = true
                     }
                     .buttonStyle(.borderedProminent)
+                    .accessibilityLabel("Add a new task")
+                    .accessibilityHint("Opens a form to add a new task")
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("No Tasks. You don't have any tasks saved yet.")
                 .accessibilityRemoveTraits(.isImage)
                 Spacer()
             } else {
