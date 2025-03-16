@@ -57,6 +57,9 @@ struct TasksView: View {
             Button("Add Task", systemImage: "plus") {
                 showAddTask = true
             }
+            .accessibilityRemoveTraits(.isImage)
+            .accessibilityLabel("Add a new task")
+            .accessibilityHint("Opens a form to add a new task")
             .disabled(tasks.isEmpty)
         }
         //MARK: Sheet Add Category

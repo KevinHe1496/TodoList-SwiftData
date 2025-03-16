@@ -72,6 +72,9 @@ struct ContentView: View {
                 Button("Add Category", systemImage: "plus") {
                     showAddCategory = true
                 }
+                .accessibilityRemoveTraits(.isImage)
+                .accessibilityLabel("Add a new category")
+                .accessibilityHint("Opens a form to add a new category")
                 .disabled(categories.isEmpty)
             }
             .sheet(isPresented: $showAddCategory) {
@@ -79,6 +82,7 @@ struct ContentView: View {
                     .presentationDetents([.medium])
             }
             .searchable(text: $searchText)
+        
             .onAppear {
                 notificationRequest()
             }
